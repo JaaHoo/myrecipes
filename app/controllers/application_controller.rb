@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def require_user
     unless logged_in?
       flash[:danger] = "You must be logged in to perform that action"
-      redirect_to :back
+      redirect_to request.env["HTTP_REFERER"].nil? ? root_path : :back
     end
   end
 end
